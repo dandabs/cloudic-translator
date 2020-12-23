@@ -45,7 +45,7 @@ app.get("/translate/:word", (request, response) => {
   
   var temp = JSON.parse("{}");
   
-  con.query("SELECT * FROM `cloudic_words` WHERE `english` = '" + request.params.word + "'", function (err, result) {
+  con.query('SELECT * FROM `cloudic_words` WHERE `english` = "' + request.params.word + '"', function (err, result) {
     if (err) throw err;
     console.log("Result: " + result[0]);
     if (result != '') temp = result[0];

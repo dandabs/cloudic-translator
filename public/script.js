@@ -33,10 +33,6 @@ async function translateInto() {
 	  await sleep(10 - i);
     var word = i;
     
-    // shortened words
-    if (word.toLowerCase() == "don't") {
-    };
-    
     // case changes
     if (word.toLowerCase() == "me") word = "I";
     
@@ -91,6 +87,9 @@ async function translateInto() {
       console.log(data);
       if (JSON.stringify(data) != "{}") word = data.cloudic;
       if (JSON.stringify(data) == "{}") word = word;
+      
+      // don't (verb present)
+      
       
       // verb [TO]
       if (tempArray.length != 0 && data.type == "VERB") {
