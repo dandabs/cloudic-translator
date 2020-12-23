@@ -43,10 +43,13 @@ app.get("/translate/:word", (request, response) => {
   
   console.log(request.params.word);
   
+  var temp = JSON.parse("{}");
+  
   con.query("SELECT * FROM `cloudic_words` WHERE `english` = '" + request.params.word + "'", function (err, result) {
     if (err) throw err;
     console.log("Result: " + result[0]);
-    response.send(result[0]);
+    if (result != '') temp = result[0];
+    response.send(temp);
   });
   
 });

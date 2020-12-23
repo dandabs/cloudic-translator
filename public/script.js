@@ -12,7 +12,10 @@ function sleep(ms) {
 }
 
 async function translateInto() {
+  
   const toTranslate = document.getElementById('englishbox').value;
+  
+  //if (toTranslate.charAt(toTranslate.length - 1) != " ") return;
   
   //setTemp(toTranslate);
   
@@ -36,19 +39,26 @@ async function translateInto() {
     if (word.toLowerCase() == "their") word = "they's";
     if (word.toLowerCase() == "our") word = "we's";
     
-    // translate
     
+    // articles
+    if (word.toLowerCase() == "the") word = "";
+    if (word.toLowerCase() == "a") word = "";
+    if (word.toLowerCase() == "an") word = "";
+    
+    // translate
     await fetch('/translate/' + word)
     .then(response => response.json())
     .then(data => {
       
       console.log(data);
-      if (data != undefined) word = data.cloudic;
+      if (JSON.stringify(data) != "{}") word = data.cloudic;
+      if (JSON.stringify(data) == "{}") word = word;
       
-     tempArray.push(word);
-     console.log(i + " => " + word);
+    tempArray.push(word);
+    console.log(i + " => " + word);
       
     });
+    
 }, undefined);
   
   setTemp(tempArray.join(' '));
