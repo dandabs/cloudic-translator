@@ -89,9 +89,8 @@ async function translateInto() {
       
       // verb [PRESENT]
       if (tempArray.length != 0 && data.type == "VERB") {
-        if (tempArray[tempArray.length - 1].toLowerCase() == "to") {
-          tempArray.pop(tempArray.length - 1);
-          word = "õ " + word;
+        if (["aini", "eni", "heð", "ainiti", "eniti", "heði"].includes(tempArray[tempArray.length - 1].toLowerCase())) {
+          word = word + "õni";
         }
       }
       
