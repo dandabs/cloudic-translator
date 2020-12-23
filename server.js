@@ -4,7 +4,10 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
+var bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 var mysql      = require('mysql');
 var con = mysql.createConnection({
@@ -38,10 +41,12 @@ app.get("/", (request, response) => {
 
 app.get("/translate/:word", (request, response) => {
   
-  con.query(`SELECT * FROM cloudic_words WHERE english = "${request.body.word}"`, function (err, result) {
+  console.log(request.params.word);
+  
+  con.query("SELECT * FROM `cloudic_words` WHERE `english` = '" + request.params.word + "'", function (err, result) {
     if (err) throw err;
-    console.log("Result: " + result);
-    response.send(result);
+    console.log("Result: " + result[0]);
+    response.send(result[0]);
   });
   
 });

@@ -37,9 +37,15 @@ async function translateInto() {
     if (word.toLowerCase() == "our") word = "we's";
     
     // translate
+    
     fetch('/translate/' + word)
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => {
+      
+      console.log(data);
+      if (data != undefined) word = data.cloudic;
+      
+    });
     
     tempArray.push(word);
     console.log(i + " => " + word);
