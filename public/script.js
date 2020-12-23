@@ -33,6 +33,10 @@ async function translateInto() {
 	  await sleep(10 - i);
     var word = i;
     
+    // shortened words
+    if (word.toLowerCase() == "don't") {
+    };
+    
     // case changes
     if (word.toLowerCase() == "me") word = "I";
     
