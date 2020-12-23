@@ -3,6 +3,11 @@
 
 console.log("hello world :o");
 
+const capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 function setTemp(value) {
   document.getElementById('tempbox').value = value;
 }
@@ -42,13 +47,21 @@ async function translateInto() {
     var genitive = false;
     
     // genitive
-    if (word.charAt(word.length - 2) == "'") {
+    if (word.charAt(word.length - 2) == "'" || word.charAt(word.length - 1) == "'") {
       
       if (word.charAt(word.length - 1) == "s") {
         
+              genitive = true;
+              word = word.split("'s")[0];
         
       }
-    
+      
+      if (word.charAt(word.length - 1) == "'") {
+        
+        genitive = true;
+        word = word.split("'")[0] + "s";
+        
+      }
       
     }
     
@@ -70,12 +83,29 @@ async function translateInto() {
       if (tempArray.length != 0) {
         if (tempArray[tempArray.length - 1] == "of") {
           tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
           word = word + "vi";
+        }
+      }
+      
+      // inessive [welcome to, into]
+      if (tempArray.length != 0) {
+        if (tempArray[tempArray.length - 1] == "to" && tempArray[tempArray.length - 2] != "welcome") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "ni";
+        }
+        if (tempArray[tempArray.length - 1] == "to" && tempArray[tempArray.length - 2] == "welcome") {
+          tempArray.pop(tempArray.length - 1);
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "ni";
         }
       }
       
       // genitive ['S]
       if (genitive) {
+        if (word.charAt(word.length - 1) != "i") word = word + "i";
         word = word + "vi";
       }
       
@@ -86,6 +116,6 @@ async function translateInto() {
     
 }, undefined);
   
-  setTemp(tempArray.join(' '));
+  setTemp(capitalize(tempArray.join(' ')));
   
 }
