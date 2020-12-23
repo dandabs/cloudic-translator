@@ -89,7 +89,13 @@ async function translateInto() {
       if (JSON.stringify(data) == "{}") word = word;
       
       // don't (verb present)
-      
+      if (tempArray.length != 0 && data.type == "VERB") {
+        if (tempArray[tempArray.length - 1].toLowerCase() == "jõri eki") {
+          tempArray.pop(tempArray.length - 1);
+          tempArray.pop(tempArray.length - 2);
+          word = word + " eki";
+        }
+      }
       
       // verb [TO]
       if (tempArray.length != 0 && data.type == "VERB") {
