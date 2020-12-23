@@ -79,27 +79,71 @@ async function translateInto() {
       if (JSON.stringify(data) != "{}") word = data.cloudic;
       if (JSON.stringify(data) == "{}") word = word;
       
+      // verb [TO]
+      if (tempArray.length != 0 && data.type == "VERB") {
+        if (tempArray[tempArray.length - 1].toLowerCase() == "to") {
+          tempArray.pop(tempArray.length - 1);
+          word = "õ " + word;
+        }
+      }
+      
+      // verb [PRESENT]
+      if (tempArray.length != 0 && data.type == "VERB") {
+        if (tempArray[tempArray.length - 1].toLowerCase() == "to") {
+          tempArray.pop(tempArray.length - 1);
+          word = "õ " + word;
+        }
+      }
+      
       // genitive [OF]
       if (tempArray.length != 0) {
-        if (tempArray[tempArray.length - 1] == "of") {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "of") {
           tempArray.pop(tempArray.length - 1);
           if (word.charAt(word.length - 1) != "i") word = word + "i";
           word = word + "vi";
         }
       }
       
-      // inessive [welcome to, into]
+      // illative [welcome to, into]
       if (tempArray.length != 0) {
-        if (tempArray[tempArray.length - 1] == "to" && tempArray[tempArray.length - 2] != "welcome") {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "into") {
           tempArray.pop(tempArray.length - 1);
           if (word.charAt(word.length - 1) != "i") word = word + "i";
           word = word + "ni";
         }
-        if (tempArray[tempArray.length - 1] == "to" && tempArray[tempArray.length - 2] == "welcome") {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "to" && tempArray[tempArray.length - 2].toLowerCase()  == "welcome") {
           tempArray.pop(tempArray.length - 1);
           tempArray.pop(tempArray.length - 1);
           if (word.charAt(word.length - 1) != "i") word = word + "i";
           word = word + "ni";
+        }
+      }
+      
+      // Inessive [in, inside]
+      if (tempArray.length != 0) {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "in") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "sai";
+        }
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "inside") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "sai";
+        }
+      }
+      
+      // Allative [to, for]
+      if (tempArray.length != 0) {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "to") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "lei";
+        }
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "for") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "lei";
         }
       }
       
