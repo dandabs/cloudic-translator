@@ -45,6 +45,7 @@ async function translateInto() {
     if (word.toLowerCase() == "our") word = "we's";
     
     var genitive = false;
+    var present = false;
     
     // genitive
     if (word.charAt(word.length - 2) == "'" || word.charAt(word.length - 1) == "'") {
@@ -62,6 +63,14 @@ async function translateInto() {
         word = word.split("'")[0] + "s";
         
       }
+      
+    }
+    
+    // present tense
+    if (word.charAt(word.length - 3) == "g" || word.charAt(word.length - 2) == "n" || word.charAt(word.length - 1) == "i") {
+ 
+              present = true;
+              word = word.split("ing")[0];
       
     }
     
@@ -90,6 +99,9 @@ async function translateInto() {
       // verb [PRESENT]
       if (tempArray.length != 0 && data.type == "VERB") {
         if (["aini", "eni", "heð", "ainiti", "eniti", "heði"].includes(tempArray[tempArray.length - 1].toLowerCase())) {
+          word = word + "õni";
+        }
+        if (tempArray[tempArray.length - 1].toLowerCase() == "iði" && present) {
           word = word + "õni";
         }
       }
