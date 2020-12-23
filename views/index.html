@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/style.css">
 
     <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
+    <script src="/script.js"></script>
   </head>
   <body>
     <header>
@@ -45,12 +45,17 @@
       <form>
         <div class="col-12">
             <div class="form-group">
-    <textarea class="form-control" id="englishbox" rows="3" placeholder="Text to translate"></textarea>
+    <textarea class="form-control" id="englishbox" rows="3" placeholder="Text to translate" oninput="translate()"></textarea>
   </div>
       </div>
         <div class="col-12">
             <div class="form-group">
     <textarea class="form-control" id="cloudicbox" rows="3" placeholder="Translation"></textarea>
+  </div>
+      </div>
+        <div class="col-12">
+            <div class="form-group">
+    <textarea class="form-control" id="tempbox" rows="3" placeholder="Temporary storage" readonly></textarea>
   </div>
       </div>
       </form>
