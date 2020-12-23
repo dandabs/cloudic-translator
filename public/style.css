@@ -1,11 +1,13 @@
 /* this file is loaded by index.html and styles the page */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 2em 1em;
   line-height: 1.5em;
 }

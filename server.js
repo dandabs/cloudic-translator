@@ -8,10 +8,10 @@ const app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
+  host     : process.env.HOST,
+  user     : process.env.USERNAME,
+  password : process.env.PASSWORD,
+  database : process.env.DB
 });
 
 // our default array of dreams
