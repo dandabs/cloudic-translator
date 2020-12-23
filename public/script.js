@@ -76,8 +76,8 @@ async function translateInto() {
     
     // articles
     if (word.toLowerCase() == "the") return;
-    if (word.toLowerCase() == "a") word = "";
-    if (word.toLowerCase() == "an") word = "";
+    if (word.toLowerCase() == "a") return;
+    if (word.toLowerCase() == "an") return;
     
     // translate
     await fetch('/translate/' + word)
