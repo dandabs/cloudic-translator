@@ -15,7 +15,7 @@ async function translateInto() {
   
   const toTranslate = document.getElementById('englishbox').value;
   
-  //if (toTranslate.charAt(toTranslate.length - 1) != " ") return;
+  //if (toTranslate.charAt(toTranslate.length - 1) != "'") return;
   
   //setTemp(toTranslate);
   
@@ -39,9 +39,21 @@ async function translateInto() {
     if (word.toLowerCase() == "their") word = "they's";
     if (word.toLowerCase() == "our") word = "we's";
     
+    var genitive = false;
+    
+    // genitive
+    if (word.charAt(word.length - 2) == "'") {
+      
+      if (word.charAt(word.length - 1) == "s") {
+        
+        
+      }
+    
+      
+    }
     
     // articles
-    if (word.toLowerCase() == "the") word = "";
+    if (word.toLowerCase() == "the") return;
     if (word.toLowerCase() == "a") word = "";
     if (word.toLowerCase() == "an") word = "";
     
@@ -53,6 +65,19 @@ async function translateInto() {
       console.log(data);
       if (JSON.stringify(data) != "{}") word = data.cloudic;
       if (JSON.stringify(data) == "{}") word = word;
+      
+      // genitive [OF]
+      if (tempArray.length != 0) {
+        if (tempArray[tempArray.length - 1] == "of") {
+          tempArray.pop(tempArray.length - 1);
+          word = word + "vi";
+        }
+      }
+      
+      // genitive ['S]
+      if (genitive) {
+        word = word + "vi";
+      }
       
     tempArray.push(word);
     console.log(i + " => " + word);
