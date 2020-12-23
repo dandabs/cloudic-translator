@@ -7,11 +7,16 @@ const express = require("express");
 const app = express();
 
 var mysql      = require('mysql');
-var connection = mysql.createConnection({
+var con = mysql.createConnection({
   host     : process.env.HOST,
   user     : process.env.USERNAME,
   password : process.env.PASSWORD,
   database : process.env.DB
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
 });
 
 // our default array of dreams
@@ -30,11 +35,17 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
+
+app.get("/translate/:word", (request, response) => {
+  
+  con.query(`SELECT * FROM cloudic_words WHERE english = "${request.body.word}"`, function (err, result) {
+    if (err) throw err;
+    console.log("Result: " + result);
+    response.send(result);
+  });
+  
 });
+
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
