@@ -14,7 +14,7 @@ function sleep(ms) {
 async function translateInto() {
   const toTranslate = document.getElementById('englishbox').value;
   
-  setTemp(toTranslate);
+  //setTemp(toTranslate);
   
   const transArray = toTranslate.split(" ");
   
@@ -38,17 +38,17 @@ async function translateInto() {
     
     // translate
     
-    fetch('/translate/' + word)
+    await fetch('/translate/' + word)
     .then(response => response.json())
     .then(data => {
       
       console.log(data);
       if (data != undefined) word = data.cloudic;
       
+     tempArray.push(word);
+     console.log(i + " => " + word);
+      
     });
-    
-    tempArray.push(word);
-    console.log(i + " => " + word);
 }, undefined);
   
   setTemp(tempArray.join(' '));
