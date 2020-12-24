@@ -35,6 +35,7 @@ async function translateInto() {
     
     // case changes
     if (word.toLowerCase() == "me") word = "I";
+    if (word.toLowerCase() == "using") word = "with";
     
     // possessive pronouns
     if (word.toLowerCase() == "my") word = "I's";
@@ -121,6 +122,15 @@ async function translateInto() {
           tempArray.pop(tempArray.length - 1);
           if (word.charAt(word.length - 1) != "i") word = word + "i";
           word = word + "vi";
+        }
+      }
+      
+      // instructive [WITH]
+      if (tempArray.length != 0) {
+        if (tempArray[tempArray.length - 1].toLowerCase()  == "with" || tempArray[tempArray.length - 1].toLowerCase()  == "using") {
+          tempArray.pop(tempArray.length - 1);
+          if (word.charAt(word.length - 1) != "i") word = word + "i";
+          word = word + "ðisi"
         }
       }
       
